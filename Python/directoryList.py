@@ -1,7 +1,7 @@
 # directoryList.py
 #
 # Simple program that gets a list of files in the current directory.
-# This test simply determines if the program can acces the file system.
+# This test simply determines if the program can access the file system.
 # Prints SUCCESS if successful, FAIL if not
 #
 # This program runs on the client
