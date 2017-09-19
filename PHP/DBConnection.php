@@ -19,9 +19,9 @@ Class DBConnection {
     function __construct() {
 
         $this->db = ADONewConnection('mysql');
-        $this->userName = "jbryancr_phpUser";       // Username
-        $this->password = "cosc2328";               // Password
-        $this->databaseName = "jbryancr_cosc4345";  // Database Name
+        $this->userName = "cosctea5_admin";       // Username
+        $this->password = "eb7iSYG8#zacwVD6mU0l";               // Password
+        $this->databaseName = "cosctea5_cosc4345";  // Database Name
     }
 
     // dbConnect()

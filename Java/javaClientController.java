@@ -19,7 +19,7 @@ public class COSC4345Example {
 
 			// Create a url with a query string to get the next test to execute on this client
 			//
-			URL url = new URL("http://jbryan2.create.stedwards.edu/cosc4345/getNextTest.php?action=getScriptName");
+			URL url = new URL("http://http://cosc4345-team6.com//master/getNextTest.php?action=getScriptName");
 
 			// Open the connection to the web server
 			//
