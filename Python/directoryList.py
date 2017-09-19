@@ -8,13 +8,13 @@
 
 import os
 
-def main() :
+def main():
 
     result = os.listdir(".")        # Get the directory listing in the current directory
     length = len(result)            # Are there files?
-    if (length > 0) :
+    if length > 0:
         print("SUCCESS")
-    else :
+    else:
         print("FAIL")
 
 main()
