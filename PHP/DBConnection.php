@@ -31,9 +31,9 @@ Class DBConnection {
     public function dbConnect() {
 
         $this->db->PConnect('localhost',
-        $this->userName,
-        $this->password,
-        $this->databaseName);
+            $this->userName,
+            $this->password,
+            $this->databaseName);
 
         $ret = $this->db->isConnected();
 
