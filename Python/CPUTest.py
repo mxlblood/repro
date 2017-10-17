@@ -13,13 +13,18 @@ def main():
     print ("This module will test CPU performance through the generation of", modules.valueList.CPUTEST_MAX, "integers")
 
     try:
-        generateNums(modules.valueList.CPUTEST_MAX)
-        print ("SUCCESS")
+        if(generateNums(modules.valueList.CPUTEST_MAX)==True):
+            print ("SUCCESS")
+        else:
+            raise Exception
     except:
         print ("ERROR. An unknown error occurred. CPU Terminated.")
 
 def generateNums(UPPERBOUND):
+    count = 0
+    while (count<UPPERBOUND):
+        random.randint(0,9)
+        count+=1
+    return True
 
-    for num in UPPERBOUND:
-        random.randint(0, 10)
 main()
