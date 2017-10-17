@@ -2,3 +2,4 @@
 
 # controls the max size of numbers generated in the CPUTest.py script
 CPUTEST_MAX = 1000000
+INTTEST_MAX = 1000000

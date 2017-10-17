@@ -1,7 +1,5 @@
 import random
-
 import modules.valueList
-
 
 # CPUTest.py
 # Purpose: This aims to test the CPU of the SuT by attempting to successfully generate 1 million random integers.
@@ -16,9 +14,10 @@ def main():
         if(generateNums(modules.valueList.CPUTEST_MAX)==True):
             print ("SUCCESS")
         else:
+            # this makes sure that an exception is raised if the CPUTest fails on a SUT
             raise Exception
     except:
-        print ("ERROR. An unknown error occurred. CPU Terminated.")
+        print("ERROR. An unknown error occurred. CPU Terminated.")
 
 def generateNums(UPPERBOUND):
     count = 0
