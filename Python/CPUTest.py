@@ -21,9 +21,12 @@ def main():
 
 def generateNums(UPPERBOUND):
     count = 0
-    while (count<UPPERBOUND):
-        random.randint(0,9)
-        count+=1
-    return True
-
+    try:
+        while (count<UPPERBOUND):
+            random.randint(0,9)
+            count+=1
+        return True
+    except:
+        print("Error")
+        return False
 main()
