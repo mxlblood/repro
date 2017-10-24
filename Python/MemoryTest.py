@@ -9,12 +9,12 @@
 
 import random
 
-from Python.modules import valueList
 
 
 def generateList(someList):
     count = 0
-    while (count<valueList.MEMTEST_MAX):
+
+    while (count<1000000):
         someList.append(random.randint(0,9))
         count+=1
     return someList
@@ -28,3 +28,4 @@ def main():
     else:
         print("FAIL")
         raise Exception
+main()
