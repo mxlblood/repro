@@ -1,7 +1,7 @@
 # VideoTest.py
 # Purpose: This aims to test the Video-Graphics ability of the SUT by attempting to take and verify a screenshot.
 # Post: On successful generation, console returns with "SUCCESS"; if an issue occurs,"ERROR: " will be printed to the console
-import pyscreenshot as ImageGrab
+from PIL import ImageGrab
 import os
 
 def getAndVerifyIMG(img):
@@ -13,7 +13,7 @@ def getAndVerifyIMG(img):
         else:
             raise Exception
             return False
-    except:
+    except Exception:
         return False
 
 def main():
@@ -28,5 +28,7 @@ def main():
             print("SUCCESS")
         else:
             print("ERROR:", Exception)
-    except:
+    except Exception:
         raise Exception
+
+main()
