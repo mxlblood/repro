@@ -36,19 +36,67 @@ Class AutomationTest {
             $err = array("ERROR" => "No results from database");
             return $err;
         }
-
+        
         while (!$rs->EOF) {
 
             $this->test["testName"] = $rs->fields["testName"];
             $this->test["scriptName"] = $rs->fields["scriptName"];
             $rs->MoveNext();
         }
+	}
+    
+    public function putResults($result,$startTime,$endTime,$errorLog,$emailed,$testID){
+        $conn = new DBConnection();
+        $db = $conn->dbConnect();
+
+        if ($db == NULL) {
+            $err = array("ERROR" => "Cannot connect to database");
+            return $err;
+        }
+
+       $sql = "insert into testResults VALUES (null,'".$result."','". $startTime. "','". $endTime. "','".$errorLog."','".$emailed."','".$testID. "')";
+       print $sql;
+       $rs = $db->Execute($sql);
+        
+        if ($rs == false) {
+            $err = array("ERROR" => "No results from database");
+            return $err;
+        }
+        
     }
 
 	// Return the entire array
 	//
 	public function getTest(){
+        $conn = new DBConnection();
+        $db = $conn->dbConnect();
+
+        if ($db == NULL) {
+            $err = array("ERROR" => "Cannot connect to database");
+            return $err;
+        }
+	    
+	    $scriptName=getScriptName();
+        $dt = new DateTime();
+        echo $dt->format('Y-m-d H:i:s');
+        
+        $count="count startTime from testResults, tests where startTime and endTime <" .$dt."and scriptName= ".$scriptName;
+        $rs1 = $db->Execute($count);
+        if ($rs1 == false) {
+            $err1 = array("ERROR" => "No results from database");
+            return $err1;
+        }
+        
+        $dailyFreq="select dailyFrequenceCount from tests where scriptName= ".$scriptName;
+        $rs2 = $db->Execute($dailyFreq);
+        if ($rs2 == false) {
+            $err2 = array("ERROR" => "No results from database");
+            return $err2;
+        }
+        
+        if($count<$dailyFreq){
 		return $this->test;
+	    }
 	}
 
 	// Return the test name which is the description
