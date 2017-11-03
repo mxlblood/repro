@@ -31,23 +31,26 @@ public class JavaController {
 			String script = null;
 			String pythonResults = null;
 			String pythonErrors = null;
+			String scriptName = null;
 			// Read the return results and create a string with the python
 			// command to execute
 			while ((result = reader.readLine()) != null) {
 				result = result.replace("\"", "");
 				script = "python " + result;
 			}
+			scriptName = script.replaceAll("python ", "");
 			reader.close();
 			// Now spawn another process to execute the Python script
-			DateFormat df = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+			DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			Calendar getTime = Calendar.getInstance();
 			String startTime = df.format(getTime.getTime());
+			
 			Process p = Runtime.getRuntime().exec(script);
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-			//System.out.println(stdInput.readLine());
-			//System.out.println(stdError.readLine());
-			//System.out.println(stdInput.readLine());
+			// System.out.println(stdInput.readLine());
+			// System.out.println(stdError.readLine());
+			// System.out.println(stdInput.readLine());
 
 			String endTime = df.format(getTime.getTime());
 			// We need to know if the test script succeeded or failed
@@ -61,16 +64,22 @@ public class JavaController {
 			if (pythonErrors == null) {
 				if (pythonResults.contains("SUCCESS")) {
 					pythonResults = "SUCCESS";
-				} else {
-					pythonResults = "FAILURE";
+					pythonErrors = pythonErrors.toUpperCase();
 				}
 			}
-			System.out.println("result=" + pythonResults + "&error=" + pythonErrors + "&startTime=" + startTime
-					+ "&endTime=" + endTime);
+			else {
+				pythonResults = "FAILURE";
+			}
+			System.out.println("action=putResults&result=" + pythonResults + "&error=" + pythonErrors + "&startTime="
+					+ startTime + "&endTime=" + endTime + "&scriptName=" + scriptName);
 			// You may need to add more code here to return the SUCCESS or FAIL
 			// back to the database for tracking purposes. That code should go
 			// here
-
+			URL submitUrl = new URL("http://cosc4345-team6.com/master/putResults.php?action=putResults&result=" + pythonResults + "&error=" + pythonErrors + "&startTime=" + startTime + "&endTime=" + endTime + "&scriptName=" + scriptName);
+			URLConnection submitSock = submitUrl.openConnection();
+			BufferedReader newReader = new BufferedReader(new InputStreamReader(submitSock.getInputStream()));
+			newReader.close();
+			System.out.println(submitUrl);
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {
